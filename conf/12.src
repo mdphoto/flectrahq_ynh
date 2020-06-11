@@ -2,4 +2,4 @@ SOURCE_URL=https://gitlab.com/flectra-hq/flectra/-/archive/v1.7.0/flectra-v1.7.0
 SOURCE_SUM=fe4c50deb1d5988d59c162c695d33fd1
 SOURCE_FILENAME=flectra-v1.7.0.tar.gz
 SOURCE_FORMAT=tar.gz
-SOURCE_SUM_PRG=sha256sum
+SOURCE_SUM_PRG=md5sum
