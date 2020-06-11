@@ -1,0 +1,62 @@
+#!/bin/bash
+set -eu
+
+# Import helpers
+source /usr/share/yunohost/helpers
+source ../settings/scripts/_future.sh
+source ../settings/scripts/_common.sh
+
+ynh_abort_if_errors
+
+export app=$YNH_APP_INSTANCE_NAME
+export domain=$(ynh_app_setting_get $app domain)
+export app_version=$(ynh_app_setting_get $app app_version)
+export oca=$(ynh_app_setting_get $app oca)
+export port=$(ynh_app_setting_get $app port)
+export port_chat=$(ynh_app_setting_get $app port_chat)
+export db_name=$(ynh_app_setting_get $app db_name)
+export db_pass=$(ynh_app_setting_get $app psqlpwd)
+export final_path=$(ynh_app_setting_get $app final_path)
+export conf_file=$(ynh_app_setting_get $app conf_file)
+export is_public=0
+export bin_file="$final_path/venv/bin/python $final_path/$APPNAME/$FORKNAME-bin"
+if [ "$app_version" = "9" ]; then
+    bin_file="$final_path/venv/bin/python $final_path/$APPNAME/$FORKNAME.py"
+fi
+if [ "$app_version" = "8" ]; then
+    bin_file="$final_path/venv/bin/python $final_path/$APPNAME/$FORKNAME.py"
+fi
+
+#=================================================
+# CHECK IF THE APP CAN BE RESTORED
+#=================================================
+ynh_webpath_available "$domain" "/"
+
+#=================================================
+# RESTORE THE APP BY MODIFYING THE SYSTEM
+#=================================================
+# Restore files
+function restore_files () {
+    ynh_restore
+    chown -R $app:$app $final_path
+    chown $app:$app $conf_file
+    touch /var/log/$app.log
+    chown $app:$app /var/log/$app.log
+}
+
+# Restore database
+function restore_database () {
+    su -c "psql $app" postgres < ./dump.sql
+}
+
+ynh_system_user_create $app $final_path
+restore_files
+install_dependencies
+ynh_psql_test_if_first_run
+ynh_psql_setup_db $db_name $db_name $db_pass
+add_services
+restore_database
+ssowat_and_restart
+
+
+

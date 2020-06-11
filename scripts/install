@@ -1,0 +1,99 @@
+#!/bin/bash
+
+set -eu
+
+source /usr/share/yunohost/helpers
+source _future.sh
+source _common.sh
+
+ynh_abort_if_errors
+
+# Arguments from manifest
+export app=$YNH_APP_INSTANCE_NAME
+ynh_export domain oca admin_password lang tz 
+export app_version=$YNH_APP_ARG_VERSION
+export is_public=0
+export final_path="/var/www/$app"
+export conf_file=/etc/$app/main.conf
+export bin_file="$final_path/venv/bin/python $final_path/$APPNAME/$FORKNAME-bin"
+if [ "$app_version" = "9" ]; then
+    bin_file="$final_path/venv/bin/python $final_path/$APPNAME/$FORKNAME.py"
+fi
+if [ "$app_version" = "8" ]; then
+    bin_file="$final_path/venv/bin/python $final_path/$APPNAME/$FORKNAME.py"
+fi
+export db_name=$(ynh_sanitize_dbid $app)
+export port=$(ynh_find_port 8069)
+export port_chat=$(ynh_find_port 8072)
+export preinstall=0
+
+#=================================================
+# CHECK IF THE APP CAN BE INSTALLED WITH THIS ARGS
+#=================================================
+test ! -e "$final_path" || ynh_die "This path already contains a folder"
+ynh_webpath_register $app $domain "/"
+
+
+#=================================================
+# SETUP THE APP BY MODIFYING THE SYSTEM
+#=================================================
+
+function setup_database() {
+    export preinstall=1
+    ynh_configure server.conf $conf_file
+    chown $app:$app $conf_file
+    # Load translation
+    #param=" --without-demo True --addons-path $final_path/$APPNAME/addons --db_user $app --db_password $db_pass --db_host 127.0.0.1 --db_port 5432 --db-filter '^$app\$' -d $app "
+    param=" -c $conf_file -d $app "
+    sudo -u $app $bin_file -c $conf_file --stop-after-init -i auth_ldap -d $app
+    sudo -u $app $bin_file -c $conf_file --stop-after-init --load-language $lang -d $app
+    # Configure language, timezone and ldap
+    sudo -u $app $bin_file shell -c $conf_file -d $app <<< \
+"
+self.env['res.users'].search([['login', '=', 'admin']])[0].write({'password': '$admin_password'})
+self.env.cr.commit()
+"
+    sudo -u $app $bin_file shell -c $conf_file -d $app <<< \
+"
+self.write({'tz':'$tz','lang':'$lang'})
+self.env.cr.commit()
+"
+    sudo -u $app $bin_file shell -c $conf_file -d $app <<< \
+"
+template=env['res.users'].create({
+  'login':'template',
+  'password':'',
+  'name':'template',
+  'email':'template',
+  'sel_groups_9_10':9,
+  'tz':'$tz',
+  'lang':'$lang'
+})
+self.env.cr.commit()
+self.company_id.ldaps.create({
+  'ldap_server':'localhost',
+  'ldap_server_port':389,
+  'ldap_base':'ou=users, dc=yunohost,dc=org',
+  'ldap_filter':'uid=%s',
+  'user':template.id,
+  'company':self.company_id.id
+})
+self.env.cr.commit()
+"
+    export preinstall=0
+    ynh_configure server.conf $conf_file
+    chown $app:$app $conf_file
+}
+ynh_save_args domain app_version oca lang tz final_path conf_file db_name port port_chat
+ynh_system_user_create -u $app -h $final_path
+export db_pass=$(ynh_string_random)
+setup_files
+install_dependencies
+ynh_psql_test_if_first_run
+ynh_psql_setup_db $db_name $db_name $db_pass
+export db_pass=$(ynh_app_setting_get $app psqlpwd)
+ynh_configure_nginx
+add_services
+setup_database
+ssowat_and_restart
+

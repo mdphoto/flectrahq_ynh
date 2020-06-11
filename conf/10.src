@@ -1,0 +1,5 @@
+SOURCE_URL=https://github.com/odoo/odoo/archive/f69c004795e0a7f32d5c6243cc3d4915cf010bbe.tar.gz
+SOURCE_SUM=79bfb272bc48509390386de357413e34bbb10fceee0662ca89e9e18383ed522f
+SOURCE_FILENAME=odoo-10.tar.gz
+SOURCE_FORMAT=tar.gz
+SOURCE_SUM_PRG=sha256sum

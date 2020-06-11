@@ -1,0 +1,19 @@
+[Unit]
+Description={{ app }}
+Requires=postgresql.service
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+SyslogIdentifier={{ app }}
+PermissionsStartOnly=true
+User={{ app }}
+Group={{ app }}
+Environment=PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+ExecStart={{ bin_file }} --config {{ conf_file }} --logfile /var/log/{{ app }}.log
+Restart=always
+RestartSec=3
+StandardOutput=journal+console
+
+[Install]
+WantedBy=multi-user.target

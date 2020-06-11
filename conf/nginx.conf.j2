@@ -1,0 +1,46 @@
+location / {
+        if ($scheme = http) {
+                rewrite ^ https://$server_name$request_uri? permanent;
+        }
+        try_files $uri @{{ app }};
+}
+location @{{ app }} {
+    proxy_pass http://127.0.0.1:{{ port }};
+    proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+    proxy_buffers 16 64k;
+    proxy_buffer_size 128k;
+    proxy_redirect		off;
+    proxy_set_header	Host $host;
+    proxy_set_header	X-Real-IP $remote_addr;
+    proxy_set_header	X-Forwarded-Proto $scheme;
+    proxy_set_header	X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header	X-Forwarded-Host $host;
+    proxy_read_timeout 720s;
+    proxy_connect_timeout 720s;
+    proxy_send_timeout 720s;
+}
+location /longpolling {
+    proxy_pass http://127.0.0.1:{{ port_chat }};
+    proxy_set_header	Host $host;
+    proxy_set_header	X-Real-IP $remote_addr;
+    proxy_set_header	X-Forwarded-Proto $scheme;
+    proxy_set_header	X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header	X-Forwarded-Host $host;
+    proxy_read_timeout 720s;
+    proxy_connect_timeout 720s;
+    proxy_send_timeout 720s;
+}
+location ~* /web/static/ {
+    proxy_cache_valid 200 90m;
+    proxy_buffering on;
+    expires 864000;
+    proxy_pass http://127.0.0.1:{{ port }};
+    proxy_set_header	Host $host;
+    proxy_set_header	X-Real-IP $remote_addr;
+    proxy_set_header	X-Forwarded-Proto $scheme;
+    proxy_set_header	X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header	X-Forwarded-Host $host;
+    proxy_read_timeout 720s;
+    proxy_connect_timeout 720s;
+    proxy_send_timeout 720s;
+}

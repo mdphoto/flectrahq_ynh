@@ -1,0 +1,29 @@
+#!/bin/bash
+set -u
+
+source /usr/share/yunohost/helpers
+source _future.sh
+source _common.sh
+
+app=$YNH_APP_INSTANCE_NAME
+
+
+# Retrieve app settings
+domain=$(ynh_app_setting_get "$app" domain)
+final_path=$(ynh_app_setting_get "$app" final_path)
+conf_file=$(ynh_app_setting_get "$app" conf_file)
+
+yunohost service stop $app
+yunohost service remove $app
+ynh_psql_remove_db $app $app
+
+ynh_secure_remove "$final_path"
+ynh_secure_remove "$conf_file"
+
+ynh_remove_app_dependencies
+
+ynh_system_user_delete $app
+
+ynh_remove_nginx_config
+
+ynh_del_swap

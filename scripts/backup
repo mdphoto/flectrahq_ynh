@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Exit on command errors and treat unset variables as an error
+set -eu
+
+source /usr/share/yunohost/helpers
+#source _future.sh
+source ../settings/scripts/_common.sh
+ynh_abort_if_errors
+
+app=$YNH_APP_INSTANCE_NAME
+domain=$(ynh_app_setting_get "$app" domain)
+final_path=$(ynh_app_setting_get "$app" final_path)
+conf_file=$(ynh_app_setting_get "$app" conf_file)
+
+# Backup sources & data
+ynh_backup "${final_path}/$APPNAME"
+ynh_backup "${final_path}/custom-addons"
+ynh_backup "${final_path}/.local"
+
+# Backup configuration
+ynh_backup "$conf_file"
+
+# Copy NGINX configuration
+ynh_backup "/etc/nginx/conf.d/${domain}.d/${app}.conf"
+
+# Backup services
+ynh_backup "/etc/systemd/system/${app}.service"
+
+# Copy database
+sudo su -c "pg_dump $app" postgres > ./dump.sql
