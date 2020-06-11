@@ -42,11 +42,11 @@
         }
       },
       {
-        "name": "extra-addons",
+        "name": "oca",
         "type": "boolean",
         "default": false,
         "ask": {
-          "en": "Do you want to setup extra-addons instead of LibreERP ? (not yet implemented)",
+          "en": "Do you want to setup OCA instead of LibreERP ? (not yet implemented)",
           "fr": "Désirez vous installer OCA à la place des sources de LibreERP (pas encore implémenté)"
         }
       },
