@@ -19,7 +19,7 @@ source _common.sh
 export app=$YNH_APP_INSTANCE_NAME
 export domain=$(ynh_app_setting_get "$app" domain)
 export app_version=$(ynh_app_setting_get "$app" app_version)
-export extra-addons=$(ynh_app_setting_get "$app" extra-addons)
+export oca=$(ynh_app_setting_get "$app" oca)
 export port=$(ynh_app_setting_get $app port)
 export port_chat=$(ynh_app_setting_get $app port_chat)
 export is_public=0
