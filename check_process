@@ -2,8 +2,8 @@
 	auto_remove=1
 	; Manifest
 		domain="domain.tld"	(DOMAIN)
-        version="1.7.0"
-        extra-addons=0
+        version="12"
+        oca=0
         admin_password="testpassw0rD"
 		lang="en_US"
         tz="Etc/GMT"
