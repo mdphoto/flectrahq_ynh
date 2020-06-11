@@ -46,8 +46,8 @@
         "type": "boolean",
         "default": false,
         "ask": {
-          "en": "Do you want to setup extra-addons instead of Flectra ? (not yet implemented)",
-          "fr": "Désirez vous installer extra-addons à la place des sources de Flectra (pas encore implémenté)"
+          "en": "Do you want to setup extra-addons instead of LibreERP ? (not yet implemented)",
+          "fr": "Désirez vous installer OCA à la place des sources de LibreERP (pas encore implémenté)"
         }
       },
       {
