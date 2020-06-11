@@ -11,7 +11,7 @@ ynh_abort_if_errors
 export app=$YNH_APP_INSTANCE_NAME
 export domain=$(ynh_app_setting_get $app domain)
 export app_version=$(ynh_app_setting_get $app app_version)
-export oca=$(ynh_app_setting_get $app oca)
+export extra-addons=$(ynh_app_setting_get $app extra-addons)
 export port=$(ynh_app_setting_get $app port)
 export port_chat=$(ynh_app_setting_get $app port_chat)
 export db_name=$(ynh_app_setting_get $app db_name)
