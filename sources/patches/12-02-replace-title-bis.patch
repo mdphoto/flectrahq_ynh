@@ -7,7 +7,7 @@ index cb1184e3565..2b921b9c6d9 100644
                  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
  
 -                <title t-esc="title or 'Odoo'"/>
-+                <title t-esc="title or 'LibreERP'"/>
++                <title t-esc="title or 'FlectraHQ'"/>
                  <link type="image/x-icon" rel="shortcut icon" t-att-href="x_icon or '/web/static/src/img/favicon.ico'"/>
  
                  <script type="text/javascript">

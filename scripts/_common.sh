@@ -2,8 +2,8 @@
 # Common variables
 #
 
-export APPNAME="libreerp"
-export FORKNAME="odoo"
+export APPNAME="flectrahq-ynh"
+export FORKNAME="flectrahq"
 DEPENDENCIES="curl postgresql xfonts-75dpi xfonts-base wkhtmltopdf node-less python3-dev gcc libldap2-dev libssl-dev libsasl2-dev python3-pip python3-dev python3-venv python3-wheel libxslt-dev libzip-dev python3-setuptools python-virtualenv python-wheel python-setuptools libjpeg-dev zlib1g-dev virtualenv libfreetype6-dev"
 
 function debranding() {
@@ -11,13 +11,13 @@ function debranding() {
     if [ -d $final_path/$APPNAME/$FORKNAME ]; then
         python_app=$final_path/$APPNAME/$FORKNAME
     else
-        python_app=$final_path/$APPNAME/openerp
+        python_app=$final_path/$APPNAME/flectra
     fi
-    find $final_path/$APPNAME -type f \( -iname '*.xml' -o -iname '*.po' \) -exec sed -i 's/Powered by <a[^>]*>Odoo<\/a>//g' {} \;
-    find $final_path/$APPNAME -type f \( -iname '*.xml' -o -iname '*.po' \) -exec sed -i 's/<a[^>]*>Powered by <[^>]*>Odoo<\/[^>]*><\/a>//g' {} \;
-    find $final_path/$APPNAME -type f \( -iname '*.xml' -o -iname '*.po' \) -exec sed -i 's/Powered by <[^>]*>Odoo<\/[^>]*>//g' {} \;
-    find $final_path/$APPNAME -type f \( -iname '*.xml' -o -iname '*.po' \) -exec sed -i 's/Powered by <[^>]*><img[^>]*Odoo[^>]*><\/a>//g' {} \;
-    sed -i 's/<a[^>]*>My Odoo.com account<\/a>//g' $final_path/$APPNAME/addons/web/static/src/xml/base.xml
+    find $final_path/$APPNAME -type f \( -iname '*.xml' -o -iname '*.po' \) -exec sed -i 's/Powered by <a[^>]*>FlectraHQ<\/a>//g' {} \;
+    find $final_path/$APPNAME -type f \( -iname '*.xml' -o -iname '*.po' \) -exec sed -i 's/<a[^>]*>Powered by <[^>]*>FlectraHQ<\/[^>]*><\/a>//g' {} \;
+    find $final_path/$APPNAME -type f \( -iname '*.xml' -o -iname '*.po' \) -exec sed -i 's/Powered by <[^>]*>FlectraHQ<\/[^>]*>//g' {} \;
+    find $final_path/$APPNAME -type f \( -iname '*.xml' -o -iname '*.po' \) -exec sed -i 's/Powered by <[^>]*><img[^>]*FlectraHQ[^>]*><\/a>//g' {} \;
+    sed -i 's/<a[^>]*>My FlectraHQ.com account<\/a>//g' $final_path/$APPNAME/addons/web/static/src/xml/base.xml
     sed -i 's/<a[^>]*>Documentation<\/a>//g' $final_path/$APPNAME/addons/web/static/src/xml/base.xml
     sed -i 's/<a[^>]*>Support<\/a>//g' $final_path/$APPNAME/addons/web/static/src/xml/base.xml
     cp ../conf/logo_type.png  $python_app/addons/base/static/img/logo_white.png

@@ -7,69 +7,152 @@
     "fr": "LibreERP est une collection d'apps de gestion d'entreprise (ERP : CRM, Comptabilité, Point de Vente, RH, Achats, ...)."
   },
   "maintainer": {
-    "name": "ljf",
-    "email": "ljf+libreerp_ynh@reflexlibre.net"
+    "name": "midrc",
+    "email": "md@midrc.fr"
   },
   "previous_maintainers": {
-    "name": "scith"
+    "name": "midrc"
   },
   "version": "12.0-6",
-  "url": "https://github.com/YunoHost-Apps/libreerp_ynh",
+  "url": "https://github.com/mdphoto/flectrahq_ynh",
   "license": "LGPL-3.0,AGPL-3.0",
   "requirements": {
     "yunohost": ">= 3.4.2.3"
   },
   "multi_instance": true,
-  "services": [
-    "nginx"
-  ],
+  "services": ["nginx"],
   "arguments": {
-    "install": [{
-      "name": "domain",
-      "type": "domain",
-      "ask": {
-        "en": "Choose a domain for LibreERP (LibreERP will be installed on its root!)",
-        "fr": "Choisissez un domaine pour LibreERP (LibreERP sera installé dans sa racine !)"
+    "install": [
+      {
+        "name": "domain",
+        "type": "domain",
+        "ask": {
+          "en": "Choose a domain for LibreERP (LibreERP will be installed on its root!)",
+          "fr": "Choisissez un domaine pour LibreERP (LibreERP sera installé dans sa racine !)"
+        },
+        "example": "erp.domain.org"
       },
-      "example": "erp.domain.org"
-    }, {
-      "name": "version",
-      "choices": ["8", "9", "10", "11", "12"],
-      "default": "12",
-      "ask": {
-        "en": "Choose the version you want",
-        "fr": "Choisissez la version désirée"
-      }
-    }, {
-      "name": "oca",
-      "type": "boolean",
-      "default": false,
-      "ask": {
-        "en": "Do you want to setup OCA instead of LibreERP ? (not yet implemented)",
-        "fr": "Désirez vous installer OCA à la place des sources de LibreERP (pas encore implémenté)"
-      }
-    }, {
-      "name": "admin_password",
-      "type": "password",
-      "ask": {
-        "en": "Choose a strong master admin password",
-        "fr": "Choisissez un mot de passe maître fort pour l'administration"
-      }
-    }, {
-      "name": "lang",
-      "ask": {
-        "en": "Choose a language",
-        "fr": "Choisissez une langue"
+      {
+        "name": "version",
+        "choices": ["8", "9", "10", "11", "12"],
+        "default": "12",
+        "ask": {
+          "en": "Choose the version you want",
+          "fr": "Choisissez la version désirée"
+        }
       },
-      "choices": ["sq_AL", "am_ET", "ar_SY", "eu_ES", "bs_BA", "bg_BG", "my_MM", "ca_ES", "zh_CN", "zh_HK", "zh_TW", "hr_HR", "cs_CZ", "da_DK", "nl_BE", "nl_NL", "en_AU", "en_GB", "en_US", "et_EE", "fi_FI", "fr_BE", "fr_CA", "fr_CH", "fr_FR", "gl_ES", "ka_GE", "de_CH", "de_DE", "el_GR", "gu_IN", "he_IL", "hi_IN", "hu_HU", "id_ID", "it_IT", "ja_JP", "kab_DZ", "ko_KP", "ko_KR", "lo_LA", "lv_LV", "lt_LT", "mk_MK", "mn_MN", "nb_NO", "fa_IR", "pl_PL", "pt_BR", "pt_PT", "ro_RO", "ru_RU", "sr_RS", "sr@latin", "sk_SK", "sl_SI", "es_AR", "es_BO", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_GT", "es_MX", "es_PA", "es_PE", "es_PY", "es_UY", "es_VE", "es_ES", "sv_SE", "te_IN", "th_TH", "tr_TR", "uk_UA", "vi_VN"],
-      "default": "en_US"
-    }, {
-      "name": "tz",
-      "ask": {
-        "en": "Choose a timezone",
-        "fr": "Choisissez un fuseau horaire"
+      {
+        "name": "oca",
+        "type": "boolean",
+        "default": false,
+        "ask": {
+          "en": "Do you want to setup OCA instead of LibreERP ? (not yet implemented)",
+          "fr": "Désirez vous installer OCA à la place des sources de LibreERP (pas encore implémenté)"
+        }
       },
-      "default": "Etc/UTC"
-    }]
+      {
+        "name": "admin_password",
+        "type": "password",
+        "ask": {
+          "en": "Choose a strong master admin password",
+          "fr": "Choisissez un mot de passe maître fort pour l'administration"
+        }
+      },
+      {
+        "name": "lang",
+        "ask": {
+          "en": "Choose a language",
+          "fr": "Choisissez une langue"
+        },
+        "choices": [
+          "sq_AL",
+          "am_ET",
+          "ar_SY",
+          "eu_ES",
+          "bs_BA",
+          "bg_BG",
+          "my_MM",
+          "ca_ES",
+          "zh_CN",
+          "zh_HK",
+          "zh_TW",
+          "hr_HR",
+          "cs_CZ",
+          "da_DK",
+          "nl_BE",
+          "nl_NL",
+          "en_AU",
+          "en_GB",
+          "en_US",
+          "et_EE",
+          "fi_FI",
+          "fr_BE",
+          "fr_CA",
+          "fr_CH",
+          "fr_FR",
+          "gl_ES",
+          "ka_GE",
+          "de_CH",
+          "de_DE",
+          "el_GR",
+          "gu_IN",
+          "he_IL",
+          "hi_IN",
+          "hu_HU",
+          "id_ID",
+          "it_IT",
+          "ja_JP",
+          "kab_DZ",
+          "ko_KP",
+          "ko_KR",
+          "lo_LA",
+          "lv_LV",
+          "lt_LT",
+          "mk_MK",
+          "mn_MN",
+          "nb_NO",
+          "fa_IR",
+          "pl_PL",
+          "pt_BR",
+          "pt_PT",
+          "ro_RO",
+          "ru_RU",
+          "sr_RS",
+          "sr@latin",
+          "sk_SK",
+          "sl_SI",
+          "es_AR",
+          "es_BO",
+          "es_CL",
+          "es_CO",
+          "es_CR",
+          "es_DO",
+          "es_EC",
+          "es_GT",
+          "es_MX",
+          "es_PA",
+          "es_PE",
+          "es_PY",
+          "es_UY",
+          "es_VE",
+          "es_ES",
+          "sv_SE",
+          "te_IN",
+          "th_TH",
+          "tr_TR",
+          "uk_UA",
+          "vi_VN"
+        ],
+        "default": "en_US"
+      },
+      {
+        "name": "tz",
+        "ask": {
+          "en": "Choose a timezone",
+          "fr": "Choisissez un fuseau horaire"
+        },
+        "default": "Etc/UTC"
+      }
+    ]
   }
 }

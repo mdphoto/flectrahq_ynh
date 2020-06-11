@@ -1,5 +1,5 @@
-SOURCE_URL=https://github.com/odoo/odoo/archive/206e0b71ac74147a989db60cddae801534b97bdc.tar.gz
-SOURCE_SUM=a6d8d28bb7f20ac88fd149c652d7e4ce0f35241e46e7a3a347265dae0d7535fe
-SOURCE_FILENAME=odoo-12.tar.gz
+SOURCE_URL=https://gitlab.com/flectra-hq/flectra/-/archive/v1.7.0/flectra-v1.7.0.tar.gz
+SOURCE_SUM=fe4c50deb1d5988d59c162c695d33fd1
+SOURCE_FILENAME=flectra-v1.7.0.tar.gz
 SOURCE_FORMAT=tar.gz
 SOURCE_SUM_PRG=sha256sum
