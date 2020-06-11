@@ -1,6 +1,6 @@
 {
-  "name": "LibreERP",
-  "id": "libreerp",
+  "name": "FlectraHQ",
+  "id": "flectrahq_ynh",
   "packaging_format": 1,
   "description": {
     "en": "LibreERP is a suite of business apps (ERP: CRM, Accounting, Point of Sale, HR, Purchases...).",
