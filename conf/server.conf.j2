@@ -10,7 +10,6 @@ db_password = {{ db_pass }}
 dbfilter = ^{{ db_name }}$
 {% else %}
 db_name = {{ db_name }}
-{% if app_version > 9 %}dbfilter = False{% endif %}
 list_db = False
 {% endif %}
 addons_path = {{ final_path }}/{{ APPNAME }}/addons,{{ final_path }}/custom-addons

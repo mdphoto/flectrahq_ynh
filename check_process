@@ -2,7 +2,7 @@
 	auto_remove=1
 	; Manifest
 		domain="domain.tld"	(DOMAIN)
-        version="12"
+        version="1.7.0"
         oca=0
         admin_password="testpassw0rD"
 		lang="en_US"
@@ -36,5 +36,5 @@
 	Level 9=0
 	Level 10=0
 ;;; Options
-Email=ljf+libreerp_ynh@reflexlibre.net
+Email=md@midrc.fr
 Notification=down
