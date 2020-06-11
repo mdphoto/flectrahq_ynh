@@ -42,7 +42,7 @@
         }
       },
       {
-        "name": "extra-addons",
+        "name": "oca",
         "type": "boolean",
         "default": false,
         "ask": {
