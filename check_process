@@ -3,7 +3,7 @@
 	; Manifest
 		domain="domain.tld"	(DOMAIN)
         version="1.7.0"
-        oca=0
+        extra-addons=0
         admin_password="testpassw0rD"
 		lang="en_US"
         tz="Etc/GMT"

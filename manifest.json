@@ -42,7 +42,7 @@
         }
       },
       {
-        "name": "Extra-addons",
+        "name": "extra-addons",
         "type": "boolean",
         "default": false,
         "ask": {
