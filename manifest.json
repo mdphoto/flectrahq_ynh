@@ -3,17 +3,17 @@
   "id": "flectra",
   "packaging_format": 1,
   "description": {
-    "en": "FlectraHQ is a suite of business apps (ERP: CRM, Accounting, Point of Sale, HR, Purchases...).",
-    "fr": "FlectraHQ est une collection d'apps de gestion d'entreprise (ERP : CRM, Comptabilité, Point de Vente, RH, Achats, ...)."
+    "en": "LibreERP is a suite of business apps (ERP: CRM, Accounting, Point of Sale, HR, Purchases...).",
+    "fr": "LibreERP est une collection d'apps de gestion d'entreprise (ERP : CRM, Comptabilité, Point de Vente, RH, Achats, ...)."
   },
   "maintainer": {
     "name": "midrc",
     "email": "md@midrc.fr"
   },
   "previous_maintainers": {
-    "name": "zamentur"
+    "name": "midrc"
   },
-  "version": "0.0.1",
+  "version": "1.7.0",
   "url": "https://github.com/mdphoto/flectrahq_ynh",
   "license": "LGPL-3.0,AGPL-3.0",
   "requirements": {
@@ -27,8 +27,8 @@
         "name": "domain",
         "type": "domain",
         "ask": {
-          "en": "Choose a domain for FlectraHQ (FlectraHQ will be installed on its root!)",
-          "fr": "Choisissez un domaine pour FlectraHQ (FlectraHQ sera installé dans sa racine !)"
+          "en": "Choose a domain for LibreERP (LibreERP will be installed on its root!)",
+          "fr": "Choisissez un domaine pour LibreERP (LibreERP sera installé dans sa racine !)"
         },
         "example": "erp.domain.org"
       },
@@ -46,8 +46,8 @@
         "type": "boolean",
         "default": false,
         "ask": {
-          "en": "Do you want to setup extra-addons instead of Flectra ? (not yet implemented)",
-          "fr": "Désirez vous installer extra-addons à la place des sources de Flectra (pas encore implémenté)"
+          "en": "Do you want to setup OCA instead of LibreERP ? (not yet implemented)",
+          "fr": "Désirez vous installer OCA à la place des sources de LibreERP (pas encore implémenté)"
         }
       },
       {
