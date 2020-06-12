@@ -91,7 +91,7 @@ function add_services() {
 }
 
 function ssowat_and_restart() {
-    # Restart odoo service
+    # Restart flectra service
     service $app restart
 
     # Configure SSOWat
