@@ -9,7 +9,6 @@ DEPENDENCIES="curl postgresql xfonts-75dpi xfonts-base wkhtmltopdf node-less pyt
 function setup_files() {
    
     ynh_setup_source $final_path/$APPNAME $app_version
-    debranding
     mkdir -p $final_path/custom-addons
     chown -R $app:$app $final_path
     touch /var/log/$app.log
